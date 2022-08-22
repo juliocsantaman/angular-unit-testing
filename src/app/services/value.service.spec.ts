@@ -3,19 +3,16 @@ import { TestBed } from '@angular/core/testing';
 import { ValueService } from './value.service';
 
 describe('ValueService', () => {
-  let service: ValueService;
-  // beforeEach(() => {
-  //   TestBed.configureTestingModule({});
-  //   service = TestBed.inject(ValueService);
-  // });
 
-  // it('should be created', () => {
-  //   expect(service).toBeTruthy();
-  // });
+  let service: ValueService;
 
   beforeEach(() => {
-    service = new ValueService();
+    TestBed.configureTestingModule({
+      providers: [ ValueService ]
+    });
+    service = TestBed.inject(ValueService);
   });
+
 
   describe('Test to create the service', () => {
     it('should be created', () => {

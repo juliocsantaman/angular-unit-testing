@@ -1,4 +1,19 @@
-<input type="hidden" #selection>
+<header class="container">
+  <h1>Angular Testing</h1>
+  <p>
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae reprehenderit ab, ex doloribus, nobis magnam odio eos sit tenetur fugit ratione exercitationem, perspiciatis facilis! Magni asperiores rerum earum saepe delectus.
+  </p>
+  <nav>
+    <ul>
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/products">Products</a></li>
+      <li><a routerLink="/pico-preview">Pico preview</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+<!-- <input type="hidden" #selection>
 
 <button (click)="selection.value = 'option-1' ">
   Opción 1
@@ -11,4 +26,6 @@
 <div class="options" [ngSwitch]="selection.value">
   <p *ngSwitchCase=" 'option-1' ">Has elegido la opción 1</p>
   <p *ngSwitchCase=" 'option-2' ">Has elegido la opción 2</p>
-</div>
+</div> -->
+
+<router-outlet></router-outlet>
