@@ -1,0 +1,14 @@
+p {
+  margin: 0px;
+}
+
+.product {
+  margin: 64px 0px;
+}
+
+.product__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  gap: 16px;
+}
