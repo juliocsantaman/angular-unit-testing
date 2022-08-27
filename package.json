@@ -1,5 +1,5 @@
 {
-  "name": "angular-unit-testing-services",
+  "name": "angular-services-unit-testing",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
