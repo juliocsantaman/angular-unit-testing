@@ -4,10 +4,14 @@ import { ProductService } from './product.service';
 import { Product, CreateProductDTO, UpdateProductDTO } from '../models/product.model';
 import { environment } from 'src/environments/environment';
 import { generateManyProducts, generateOneProduct } from '../models/product.mock';
+import { HttpStatusCode, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from '../interceptors/token.interceptor';
+import { TokenService } from './token.service';
 
 describe('ProductService', () => {
   let productService: ProductService;
   let httpTestingController: HttpTestingController;
+  let tokenService: TokenService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -15,11 +19,16 @@ describe('ProductService', () => {
         HttpClientTestingModule
       ],
       providers: [
-        ProductService
+        ProductService,
+        TokenService,
+        {
+          provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true
+        }
       ]
     });
     productService = TestBed.inject(ProductService);
     httpTestingController = TestBed.inject(HttpTestingController);
+    tokenService = TestBed.inject(TokenService);
   });
 
   it('should be created', () => {
@@ -30,6 +39,8 @@ describe('ProductService', () => {
     it('should return a product list', (doneFn) => {
       const mockData: Product[] = generateManyProducts(2);
 
+      spyOn(tokenService, 'getToken').and.returnValue('123');
+
       productService.getAllSimple().subscribe((products) => {
         expect(products.length).toEqual(mockData.length);
         expect(products).toEqual(mockData);
@@ -39,6 +50,8 @@ describe('ProductService', () => {
       // http config.
       const url = `${environment.API_URL}/api/products`;
       const req = httpTestingController.expectOne(url);
+      const headers = req.request.headers;
+      expect(headers.get('Authorization')).toEqual('Bearer 123');
       req.flush(mockData);
       httpTestingController.verify();
 
@@ -189,6 +202,59 @@ describe('ProductService', () => {
       httpTestingController.verify();
 
     });
+  });
+
+  describe('Tests for getOne method', () => {
+    it('should return a product', (doneFn) => {
+      const mockData: Product = generateOneProduct();
+      const productId: string = '1';
+      productService.getOne(productId).subscribe((data) => {
+        expect(data).toEqual(mockData);
+        doneFn();
+      });
+
+      // http config.
+      const url = `${environment.API_URL}/api/products/${productId}`;
+      const req = httpTestingController.expectOne(url);
+      expect(req.request.method).toEqual('GET');
+      req.flush(mockData);
+      httpTestingController.verify();
+
+    });
+
+    it('should return the right messages when the status code is 404', (doneFn) => {
+      const productId: string = '1';
+      const errorMessage = 'Message 404';
+      const errorMock = {
+        status: HttpStatusCode.NotFound,
+        statusText: errorMessage
+      };
+      productService.getOne(productId).subscribe
+        (
+          {
+            // next: (data) => {
+            // },
+
+            error: (err) => {
+              expect(err.toString()).toContain('El producto no existe');
+              doneFn();
+            },
+
+            // complete: () => {
+            //   console.log('Complete');
+            // }
+          }
+        );
+
+      // http config.
+      const url = `${environment.API_URL}/api/products/${productId}`;
+      const req = httpTestingController.expectOne(url);
+      expect(req.request.method).toEqual('GET');
+      req.flush(errorMessage, errorMock);
+      httpTestingController.verify();
+
+    });
+
   });
 
 });
