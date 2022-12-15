@@ -12,6 +12,8 @@ describe('ProductService', () => {
   let productService: ProductService;
   let httpTestingController: HttpTestingController;
   let tokenService: TokenService;
+  //  let apiUrl = `${environment.API_URL}/api`;
+ let apiUrl = `${environment.API_URL}/api/v1`;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -48,7 +50,7 @@ describe('ProductService', () => {
       });
 
       // http config.
-      const url = `${environment.API_URL}/api/products`;
+      const url = `${apiUrl}/products`;
       const req = httpTestingController.expectOne(url);
       const headers = req.request.headers;
       expect(headers.get('Authorization')).toEqual('Bearer 123');
@@ -68,7 +70,7 @@ describe('ProductService', () => {
       });
 
       // http config.
-      const url = `${environment.API_URL}/api/products`;
+      const url = `${apiUrl}/products`;
       const req = httpTestingController.expectOne(url);
       req.flush(mockData);
       httpTestingController.verify();
@@ -105,7 +107,7 @@ describe('ProductService', () => {
       });
 
       // http config.
-      const url = `${environment.API_URL}/api/products`;
+      const url = `${apiUrl}/products`;
       const req = httpTestingController.expectOne(url);
       req.flush(mockData);
       httpTestingController.verify();
@@ -123,7 +125,7 @@ describe('ProductService', () => {
       });
 
       // http config.
-      const url = `${environment.API_URL}/api/products?limit=${limit}&offset=${offset}`;
+      const url = `${apiUrl}/products?limit=${limit}&offset=${offset}`;
       const req = httpTestingController.expectOne(url);
       req.flush(mockData);
       const params = req.request.params;
@@ -151,7 +153,7 @@ describe('ProductService', () => {
       });
 
       // http config.
-      const url = `${environment.API_URL}/api/products`;
+      const url = `${apiUrl}/products`;
       const req = httpTestingController.expectOne(url);
       req.flush(mockData);
       expect(req.request.body).toEqual(dto);
@@ -174,7 +176,7 @@ describe('ProductService', () => {
       });
 
       // http config.
-      const url = `${environment.API_URL}/api/products/${productId}`;
+      const url = `${apiUrl}/products/${productId}`;
       const req = httpTestingController.expectOne(url);
       expect(req.request.method).toEqual('PUT');
       expect(req.request.body).toEqual(dto);
@@ -195,7 +197,7 @@ describe('ProductService', () => {
       });
 
       // http config.
-      const url = `${environment.API_URL}/api/products/${productId}`;
+      const url = `${apiUrl}/products/${productId}`;
       const req = httpTestingController.expectOne(url);
       expect(req.request.method).toEqual('DELETE');
       req.flush(mockData);
@@ -214,7 +216,7 @@ describe('ProductService', () => {
       });
 
       // http config.
-      const url = `${environment.API_URL}/api/products/${productId}`;
+      const url = `${apiUrl}/products/${productId}`;
       const req = httpTestingController.expectOne(url);
       expect(req.request.method).toEqual('GET');
       req.flush(mockData);
@@ -247,7 +249,7 @@ describe('ProductService', () => {
         );
 
       // http config.
-      const url = `${environment.API_URL}/api/products/${productId}`;
+      const url = `${apiUrl}/products/${productId}`;
       const req = httpTestingController.expectOne(url);
       expect(req.request.method).toEqual('GET');
       req.flush(errorMessage, errorMock);

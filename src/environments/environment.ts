@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  //API_URL: 'https://api.escuelajs.co',
-  API_URL: 'https://young-sands-07814.herokuapp.com'
+  API_URL: 'https://api.escuelajs.co',
+  //API_URL: 'https://young-sands-07814.herokuapp.com'
 };
 
 /*

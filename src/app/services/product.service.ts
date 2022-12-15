@@ -11,7 +11,8 @@ import { environment } from './../../environments/environment';
 })
 export class ProductService {
 
-  private apiUrl = `${environment.API_URL}/api`;
+//  private apiUrl = `${environment.API_URL}/api`;
+private apiUrl = `${environment.API_URL}/api/v1`;
 
   constructor(
     private http: HttpClient
