@@ -9,9 +9,12 @@ import { Calculator } from './calculator';
 export class AppComponent {
   title = 'angular-unit-testing-services';
 
+  constructor(
+  ) { }
+
   ngOnInit() {
     const calculator = new Calculator();
-
     const response = calculator.multiply(4, 5);
   }
+
 }

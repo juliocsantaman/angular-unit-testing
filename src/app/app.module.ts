@@ -11,6 +11,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { PersonComponent } from './components/person/person.component';
 import { PeopleComponent } from './components/people/people.component';
 import { ProductComponent } from './components/product/product.component';
+import { ObservableTestComponent } from './components/observable-test/observable-test.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ProductComponent } from './components/product/product.component';
     PicoPreviewComponent,
     PersonComponent,
     PeopleComponent,
-    ProductComponent
+    ProductComponent,
+    ObservableTestComponent
   ],
   imports: [
     BrowserModule,
