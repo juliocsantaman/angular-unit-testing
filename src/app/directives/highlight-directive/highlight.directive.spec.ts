@@ -2,7 +2,7 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 import { By } from '@angular/platform-browser';
 import { HighlightDirective } from './highlight.directive';
 import { Component } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 
 @Component({
   template: `
@@ -10,12 +10,13 @@ import { Component } from '@angular/core';
       <h5 appHighlight="yellow">Yellow</h5>
       <P appHighlight>Parrafo</P>
       <P>Otro parrafo</P>
+      <input type="text" [(ngModel)]="color" [appHighlight]="color">
 
   `
 })
 
 class HostComponent {
-
+  color: string = 'pink';
 }
 
 describe('HighlightDirective', () => {
@@ -25,7 +26,8 @@ describe('HighlightDirective', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HostComponent, HighlightDirective ]
+      declarations: [ HostComponent, HighlightDirective ],
+      imports: [ FormsModule ]
     })
     .compileComponents();
 
@@ -66,6 +68,22 @@ describe('HighlightDirective', () => {
 
     expect(h5Default.nativeElement.style.backgroundColor).toEqual(directive.defaultColor);
     
+  });
+
+  it('should bind <input> and change the bg color', () => {
+    const input = fixture.debugElement.query(By.css('input'));
+    const nativeElementInput: HTMLInputElement = input.nativeElement;
+    
+
+    expect(nativeElementInput.style.backgroundColor).toEqual('pink');
+
+    nativeElementInput.value = 'red';
+    nativeElementInput.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+
+    expect(nativeElementInput.style.backgroundColor).toEqual('red');
+
+
   });
 
 
