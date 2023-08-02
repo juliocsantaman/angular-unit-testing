@@ -50,7 +50,7 @@ describe('HighlightDirective', () => {
     const elementsWithHighlightDirective = fixture.debugElement.queryAll(By.directive(HighlightDirective));
     const elementsWithoutHighlightDirective = fixture.debugElement.queryAll(By.css('*:not([appHighlight]'));
 
-    expect(elementsWithHighlightDirective.length).toEqual(3);
+    expect(elementsWithHighlightDirective.length).toEqual(4);
     expect(elementsWithoutHighlightDirective.length).toEqual(1);
   });
 
