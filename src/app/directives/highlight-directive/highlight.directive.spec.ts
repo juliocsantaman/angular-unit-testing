@@ -51,7 +51,7 @@ describe('HighlightDirective', () => {
     const elementsWithoutHighlightDirective = fixture.debugElement.queryAll(By.css('*:not([appHighlight]'));
 
     expect(elementsWithHighlightDirective.length).toEqual(4);
-    expect(elementsWithoutHighlightDirective.length).toEqual(1);
+    expect(elementsWithoutHighlightDirective.length).toEqual(2);
   });
 
   it('should the elements be match with bgcolor', () => {
