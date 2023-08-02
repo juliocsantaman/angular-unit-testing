@@ -14,6 +14,7 @@ import { ProductComponent } from './components/product/product.component';
 import { ObservableTestComponent } from './components/observable-test/observable-test.component';
 import { OthersComponent } from './components/others/others.component';
 import { HighlightDirective } from './directives/highlight-directive/highlight.directive';
+import { ReversePipe } from './pipes/reverse.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HighlightDirective } from './directives/highlight-directive/highlight.d
     ProductComponent,
     ObservableTestComponent,
     OthersComponent,
-    HighlightDirective
+    HighlightDirective,
+    ReversePipe
   ],
   imports: [
     BrowserModule,

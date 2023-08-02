@@ -4,4 +4,7 @@
   <h5 appHighlight="yellow">Hay un valor</h5>
   <input type="text" [(ngModel)]="color" [appHighlight]="color">
 
+  <input type="text" [(ngModel)]="textToReverse">
+  {{ textToReverse | reverse }}
+
 </div>
